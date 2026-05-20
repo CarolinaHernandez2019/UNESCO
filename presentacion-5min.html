@@ -351,6 +351,36 @@
     letter-spacing: 0.02em;
   }
 
+  /* Contador regresivo 5 min */
+  .timer {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: #666666;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    z-index: 50;
+    user-select: none;
+    transition: color 0.3s ease;
+  }
+  .timer.running { color: #999999; }
+  .timer.warning { color: #bbbbbb; }
+  .timer.over { color: #dddddd; }
+  .timer.paused { opacity: 0.45; }
+  .timer-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #777777;
+    text-align: right;
+    margin-bottom: 0.1rem;
+  }
+
   /* Hint inicial */
   .hint {
     position: fixed;
@@ -410,19 +440,19 @@
   <!-- Slide 2: Trayectoria -->
   <section class="slide" data-slide="2">
     <div class="eyebrow">Trayectoria</div>
-    <h2 class="slide-title">Economía + demografía aplicadas a datos educativos en ALC</h2>
+    <h2 class="slide-title">Economía + demografía aplicadas a datos en ALC</h2>
     <div class="credentials">
       <div class="cred">
         <div class="cred-label">Producción estadística</div>
-        <div class="cred-value">Experiencia con microdatos de hogares. DANE y BID.</div>
+        <div class="cred-value">Experiencia con toda la cadena de datos.</div>
       </div>
       <div class="cred">
         <div class="cred-label">Regional ALC</div>
-        <div class="cred-value">Varios países de ALC. Post-pandemia y aprendizajes.</div>
+        <div class="cred-value">Proyectos: pérdida de aprendizajes y educación en países de la Amazonía.</div>
       </div>
       <div class="cred">
-        <div class="cred-label">Liderazgo actual</div>
-        <div class="cred-value">Analítica de datos sociales, SDIS Bogotá.</div>
+        <div class="cred-label">Trabajo actual</div>
+        <div class="cred-value">Analítica e innovación en datos sociales.</div>
       </div>
       <div class="cred">
         <div class="cred-label">Herramientas e idiomas</div>
@@ -433,7 +463,7 @@
 
   <!-- Slide 3: Datos de diagnóstico -->
   <section class="slide" data-slide="3">
-    <div class="eyebrow">Diagnóstico — Contexto</div>
+    <div class="eyebrow">Diagnóstico</div>
     <h2 class="slide-title">La región avanza, pero las brechas se ampliaron</h2>
     <div class="stats-grid">
       <div>
@@ -461,7 +491,7 @@
 
   <!-- Slide 4: Tres tensiones -->
   <section class="slide" data-slide="4">
-    <div class="eyebrow">Tres tensiones que enfrenta la región</div>
+    <div class="eyebrow">Contexto regional</div>
     <h2 class="slide-title">Tres tensiones estructurales</h2>
     <div class="grid-3">
       <div class="item orange">
@@ -505,14 +535,14 @@
       <div class="item">
         <div class="item-num">04</div>
         <div class="item-title">IA responsable + transferencia</div>
-        <div class="item-desc">Claude Code, Codex u otra herramienta de IA por CLI en tareas acotadas: scripts, metadatos, visualizaciones. Nunca sobre microdatos sensibles. Documentación abierta a los ministerios.</div>
+        <div class="item-desc">Claude Code, Codex u otros asistentes por CLI en tareas acotadas (scripts, metadatos, visualizaciones), nunca sobre microdatos sensibles. Documentación abierta a los ministerios.</div>
       </div>
     </div>
   </section>
 
   <!-- Slide 6: Plan de trabajo -->
   <section class="slide" data-slide="6">
-    <div class="eyebrow">Plan de trabajo — 11 meses · cuatro componentes en paralelo</div>
+    <div class="eyebrow">Plan de trabajo — 11 meses</div>
     <h2 class="slide-title">Cuatro componentes en paralelo</h2>
     <div class="timeline-bar">
       <div class="tl-seg g1">01</div>
@@ -615,26 +645,91 @@
 
 <div class="counter" id="counter">01 / 08</div>
 
+<div class="timer" id="timer" title="Pausa/Reanuda con la tecla P · Reinicia volviendo al inicio (Home)">
+  <span class="timer-label">Tiempo</span>
+  5:00
+</div>
+
 <div class="controls">
   <span>← →</span>
   <button class="nav-btn" id="prev" aria-label="Anterior">‹</button>
   <button class="nav-btn" id="next" aria-label="Siguiente">›</button>
 </div>
 
-<div class="hint">Usa las flechas del teclado para avanzar</div>
+<div class="hint">Usa las flechas del teclado para avanzar · El contador arranca al pasar a la slide 2</div>
 
 <script>
   const slides = document.querySelectorAll('.slide');
   const counter = document.getElementById('counter');
   const progress = document.getElementById('progress');
+  const timerEl = document.getElementById('timer');
   const total = slides.length;
   let current = 0;
+
+  // Contador regresivo 5 min
+  const TOTAL_SECONDS = 5 * 60;
+  let timeLeft = TOTAL_SECONDS;
+  let timerInterval = null;
+  let timerStarted = false;
+  let timerPaused = false;
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return m + ':' + String(r).padStart(2, '0');
+  }
+
+  function renderTimer() {
+    timerEl.innerHTML = '<span class="timer-label">Tiempo</span>' + fmtTime(Math.max(timeLeft, 0));
+    timerEl.classList.toggle('paused', timerPaused);
+  }
+
+  function tickTimer() {
+    if (timerPaused) return;
+    timeLeft--;
+    renderTimer();
+    if (timeLeft <= 60 && timeLeft > 0) {
+      timerEl.classList.remove('running');
+      timerEl.classList.add('warning');
+    }
+    if (timeLeft <= 0) {
+      timerEl.classList.remove('warning');
+      timerEl.classList.add('over');
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function startTimer() {
+    if (timerStarted) return;
+    timerStarted = true;
+    timerEl.classList.add('running');
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+
+  function resetTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
+    timerStarted = false;
+    timerPaused = false;
+    timeLeft = TOTAL_SECONDS;
+    timerEl.classList.remove('running', 'warning', 'over', 'paused');
+    renderTimer();
+  }
+
+  function togglePauseTimer() {
+    if (!timerStarted || timeLeft <= 0) return;
+    timerPaused = !timerPaused;
+    renderTimer();
+  }
 
   function show(i) {
     slides.forEach(s => s.classList.remove('active'));
     slides[i].classList.add('active');
     counter.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
     progress.style.width = ((i + 1) / total * 100) + '%';
+    // Arranca el contador al pasar a la slide 2 por primera vez
+    if (i >= 1 && !timerStarted) startTimer();
   }
 
   function next() { if (current < total - 1) { current++; show(current); } }
@@ -643,13 +738,15 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
     if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
-    if (e.key === 'Home') { current = 0; show(0); }
+    if (e.key === 'Home') { current = 0; show(0); resetTimer(); }
     if (e.key === 'End') { current = total - 1; show(current); }
+    if (e.key === 'p' || e.key === 'P') { togglePauseTimer(); }
   });
 
   document.getElementById('next').addEventListener('click', next);
   document.getElementById('prev').addEventListener('click', prev);
 
+  renderTimer();
   show(0);
 </script>
 
