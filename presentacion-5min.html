@@ -255,29 +255,24 @@
     max-width: 1300px;
   }
 
-  /* Labels de componentes bajo la timeline */
-  .component-labels {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    max-width: 1300px;
-    margin-bottom: 1.6rem;
-  }
-  .comp-label {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.3;
-    padding-left: 1.4rem;
-  }
-  .comp-label:not(:first-child) { padding-left: 2rem; }
-
-  /* Grid de productos cuando va combinado con timeline */
+  /* Grid de entregables: icono → título → descripción, todo centrado */
   .grid-4.deliverables {
-    margin-top: 0.5rem;
+    margin-top: 2rem;
   }
-  .grid-4.deliverables .item-desc {
-    margin-top: 0.4rem;
+  .grid-4.deliverables .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+  .grid-4.deliverables .product-icon {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.2rem;
+  }
+  .grid-4.deliverables .item-title {
+    margin-bottom: 0.4rem;
   }
   .phase-title {
     font-size: 1rem;
@@ -540,12 +535,6 @@
       <div class="tl-seg g3">03</div>
       <div class="tl-seg g4 tl-tip">04</div>
     </div>
-    <div class="component-labels">
-      <div class="comp-label">Informe Regional ODS4</div>
-      <div class="comp-label">Repositorio regional</div>
-      <div class="comp-label">SIRIED</div>
-      <div class="comp-label">Tendencias emergentes</div>
-    </div>
     <div class="grid-4 deliverables">
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -555,7 +544,8 @@
           <line x1="16" y1="30" x2="32" y2="30"/>
           <line x1="16" y1="36" x2="24" y2="36"/>
         </svg>
-        <div class="item-desc">Informe regional con foco en brechas post-pandemia.</div>
+        <div class="item-title">Informe Regional ODS4</div>
+        <div class="item-desc">Foco en brechas que se ampliaron post-pandemia.</div>
       </div>
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -564,7 +554,8 @@
           <rect x="21" y="20" width="6" height="22"/>
           <rect x="31" y="12" width="6" height="30"/>
         </svg>
-        <div class="item-desc">Página regional de indicadores en Power BI / Tableau.</div>
+        <div class="item-title">Repositorio regional</div>
+        <div class="item-desc">Página de indicadores en Power BI / Tableau.</div>
       </div>
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -573,7 +564,8 @@
           <circle cx="22" cy="32" r="10"/>
           <line x1="22" y1="32" x2="32" y2="28"/>
         </svg>
-        <div class="item-desc">SIRIED actualizado, armonizado con la CIF.</div>
+        <div class="item-title">SIRIED</div>
+        <div class="item-desc">Actualizado y armonizado con la CIF.</div>
       </div>
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -584,7 +576,8 @@
           <circle cx="36" cy="30" r="2" fill="currentColor"/>
           <circle cx="42" cy="24" r="2" fill="currentColor"/>
         </svg>
-        <div class="item-desc">Prospectiva sobre natalidad e IA generativa en el aula.</div>
+        <div class="item-title">Tendencias emergentes</div>
+        <div class="item-desc">Prospectiva: natalidad e IA generativa en aula.</div>
       </div>
     </div>
   </section>
