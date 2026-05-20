@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentación 5 min — Jenny Carolina Hernández Cardozo — UNESCO Santiago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .deck {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vh 8vw;
+    background: #1a1a1a;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  .slide.active { display: flex; }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #999999;
+    margin-bottom: 1.8rem;
+  }
+
+  h1.slide-title {
+    font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.6rem;
+    max-width: 1100px;
+  }
+
+  h2.slide-title {
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    margin-bottom: 2rem;
+    max-width: 1100px;
+    color: #ffffff;
+  }
+
+  .lead {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #bbbbbb;
+    max-width: 900px;
+    margin-bottom: 1.6rem;
+  }
+
+  /* Portada */
+  .cover-name {
+    font-size: clamp(2.6rem, 5.6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.2rem;
+    color: #ffffff;
+  }
+  .cover-role {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: #999999;
+    margin-bottom: 3.5rem;
+    max-width: 820px;
+    line-height: 1.55;
+  }
+  .cover-role strong { color: #ffffff; font-weight: 600; }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    font-size: 0.85rem;
+    color: #cccccc;
+    font-weight: 500;
+  }
+  .cover-meta .dot { color: #555555; }
+
+  /* Trayectoria */
+  .credentials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem 2.5rem;
+    margin-top: 1rem;
+    max-width: 1200px;
+  }
+  .cred-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #999999;
+    margin-bottom: 0.6rem;
+  }
+  .cred-value {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #dddddd;
+  }
+  .cred-value strong { color: #ffffff; font-weight: 600; }
+
+  /* Items numerados (tensiones, principios, productos) */
+  .grid-3, .grid-4 {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 1rem;
+    max-width: 1200px;
+  }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .item { padding: 0; }
+  .item-num {
+    font-family: 'Caveat', cursive;
+    font-size: 3.4rem;
+    font-weight: 700;
+    color: #b8e6b0;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .item.orange .item-num { color: #ffcba4; }
+
+  /* Iconos planos para productos */
+  .product-icon {
+    width: 52px;
+    height: 52px;
+    color: #b8e6b0;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .item.orange .product-icon { color: #ffcba4; }
+  .item-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+    color: #ffffff;
+  }
+  .item-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #bbbbbb;
+  }
+
+  /* Stats (datos del diagnóstico) */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    margin-top: 1rem;
+    max-width: 1200px;
+  }
+  .stat-num {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(3.2rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #b8e6b0;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-num.orange { color: #ffcba4; }
+  .stat-label {
+    font-size: 0.9rem;
+    color: #bbbbbb;
+    line-height: 1.5;
+    max-width: 280px;
+  }
+  .stat-label strong { color: #ffffff; font-weight: 600; }
+  .stat-source {
+    margin-top: 0.6rem;
+    font-size: 0.72rem;
+    color: #777777;
+    letter-spacing: 0.04em;
+  }
+
+  /* Plan de trabajo — línea de tiempo */
+  .timeline-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    max-width: 1300px;
+    position: relative;
+  }
+  .tl-seg {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding-left: 1.4rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1;
+    position: relative;
+  }
+  .tl-seg.g1 { background: #d8f0d2; }
+  .tl-seg.g2 { background: #b8e6b0; }
+  .tl-seg.g3 { background: #8dcf83; }
+  .tl-seg.g4 { background: #5fb554; }
+  .tl-seg:not(:first-child) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 14px 50%);
+    margin-left: -14px;
+    padding-left: 2rem;
+  }
+  .tl-seg.tl-tip {
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%, 14px 50%);
+  }
+  .tl-seg:first-child.tl-tip {
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
+  }
+  .tl-period {
+    position: absolute;
+    bottom: -1.4rem;
+    left: 1.4rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1300px;
+  }
+  .phase-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .phase-list {
+    list-style: none;
+    padding: 0;
+  }
+  .phase-list li {
+    font-size: 0.85rem;
+    color: #bbbbbb;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    padding-left: 0.9rem;
+    position: relative;
+  }
+  .phase-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: #b8e6b0;
+    font-weight: 700;
+  }
+  .phase.orange .phase-list li::before { color: #ffcba4; }
+
+  /* Cierre */
+  .slide.thanks {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .thanks-word {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(6rem, 14vw, 12rem);
+    font-weight: 700;
+    color: #b8e6b0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  /* Controles */
+  .controls {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 50;
+    font-size: 0.72rem;
+    color: #888888;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid #555555;
+    color: #888888;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+    transition: all 0.15s ease;
+  }
+  .nav-btn:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #b8e6b0;
+    transition: width 0.3s ease;
+    z-index: 100;
+  }
+
+  .counter {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 2rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #888888;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* Hint inicial */
+  .hint {
+    position: fixed;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    color: #777777;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeOut 4s ease forwards;
+    pointer-events: none;
+  }
+  @keyframes fadeOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  @media (max-width: 1100px) {
+    .grid-4, .timeline { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .grid-3, .stats-grid { grid-template-columns: 1fr 1fr; }
+    .slide { padding: 4vh 5vw; }
+  }
+  @media (max-width: 600px) {
+    .grid-3, .grid-4, .timeline, .stats-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .credentials { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" style="width: 12.5%"></div>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Portada -->
+  <section class="slide active" data-slide="1">
+    <div class="eyebrow">Convocatoria STG/2026/CIC/05 · UNESCO Santiago</div>
+    <h1 class="cover-name">Jenny Carolina<br>Hernández Cardozo</h1>
+    <p class="cover-role">
+      Propuesta para apoyar el componente estadístico del monitoreo regional <strong>ODS4 / Educación 2030</strong> en América Latina y el Caribe.
+    </p>
+    <div class="cover-meta">
+      <span>Economista &amp; demógrafa</span>
+      <span class="dot">·</span>
+      <span>Bogotá, Colombia</span>
+      <span class="dot">·</span>
+      <span>Mayo 2026</span>
+    </div>
+  </section>
+
+  <!-- Slide 2: Trayectoria -->
+  <section class="slide" data-slide="2">
+    <div class="eyebrow">Trayectoria</div>
+    <h2 class="slide-title">Economía + demografía aplicadas a datos educativos en ALC</h2>
+    <div class="credentials">
+      <div class="cred">
+        <div class="cred-label">Producción estadística</div>
+        <div class="cred-value">Experiencia con microdatos de hogares. DANE y BID.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-label">Regional ALC</div>
+        <div class="cred-value">Varios países de ALC. Post-pandemia y aprendizajes.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-label">Liderazgo actual</div>
+        <div class="cred-value">Analítica de datos sociales, SDIS Bogotá.</div>
+      </div>
+      <div class="cred">
+        <div class="cred-label">Herramientas e idiomas</div>
+        <div class="cred-value">Stata, R, Python, GitHub. Inglés C1.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Datos de diagnóstico -->
+  <section class="slide" data-slide="3">
+    <div class="eyebrow">Diagnóstico — Contexto</div>
+    <h2 class="slide-title">La región avanza, pero las brechas se ampliaron</h2>
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num orange">14<span style="font-size: 0.5em">pp</span></div>
+        <p class="stat-label"><strong>Brecha de acceso</strong> en secundaria alta para estudiantes con discapacidad. Subió de 8,6 pp en 2015.</p>
+        <div class="stat-source">UNESCO/UNICEF/CEPAL 2022</div>
+      </div>
+      <div>
+        <div class="stat-num orange">14<span style="font-size: 0.5em">pp</span></div>
+        <p class="stat-label"><strong>Menor tasa de terminación</strong> de secundaria entre estudiantes indígenas en la Amazonía vs. sus pares.</p>
+        <div class="stat-source">Giambruno et al. 2024</div>
+      </div>
+      <div>
+        <div class="stat-num orange">4,3<span style="font-size: 0.5em">%</span></div>
+        <p class="stat-label"><strong>Gasto educativo regional</strong> como porcentaje del PIB en 2019. Cayó desde 4,5% en 2015.</p>
+        <div class="stat-source">UNESCO/UNICEF/CEPAL 2022</div>
+      </div>
+      <div>
+        <div class="stat-num orange">15</div>
+        <p class="stat-label"><strong>Países de la región</strong> disminuyeron su gasto público en educación entre 2015 y 2019.</p>
+        <div class="stat-source">UNESCO/UNICEF/CEPAL 2022</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: Tres tensiones -->
+  <section class="slide" data-slide="4">
+    <div class="eyebrow">Tres tensiones que enfrenta la región</div>
+    <h2 class="slide-title">Tres tensiones estructurales</h2>
+    <div class="grid-3">
+      <div class="item orange">
+        <div class="item-num">01</div>
+        <div class="item-title">Heterogeneidad de los SIGED</div>
+        <div class="item-desc">Comparar entre Estados Miembros requiere armonizar definiciones.</div>
+      </div>
+      <div class="item orange">
+        <div class="item-num">02</div>
+        <div class="item-title">Invisibilidad estadística</div>
+        <div class="item-desc">Discapacidad, pueblos indígenas, migrantes y población rural.</div>
+      </div>
+      <div class="item orange">
+        <div class="item-num">03</div>
+        <div class="item-title">Transición demográfica</div>
+        <div class="item-desc">La caída de natalidad está transformando las cohortes escolares.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Enfoque metodológico -->
+  <section class="slide" data-slide="5">
+    <div class="eyebrow">Enfoque metodológico</div>
+    <h2 class="slide-title">Cuatro principios</h2>
+    <div class="grid-4">
+      <div class="item">
+        <div class="item-num">01</div>
+        <div class="item-title">Armonización de fuentes</div>
+        <div class="item-desc">Registros administrativos + evaluaciones estandarizadas + encuestas de hogares. Antecedente: 8 países amazónicos (Giambruno et al., 2024).</div>
+      </div>
+      <div class="item">
+        <div class="item-num">02</div>
+        <div class="item-title">Desagregación interseccional</div>
+        <div class="item-desc">Bajo clasificaciones CINE y CIF. Género, zona, nivel socioeconómico, discapacidad y estatus migratorio.</div>
+      </div>
+      <div class="item">
+        <div class="item-num">03</div>
+        <div class="item-title">Trazabilidad con GitHub Actions</div>
+        <div class="item-desc">Repositorios versionados con actualización automatizada.</div>
+      </div>
+      <div class="item">
+        <div class="item-num">04</div>
+        <div class="item-title">IA responsable + transferencia</div>
+        <div class="item-desc">Claude Code, Codex u otra herramienta de IA por CLI en tareas acotadas: scripts, metadatos, visualizaciones. Nunca sobre microdatos sensibles. Documentación abierta a los ministerios.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Plan de trabajo -->
+  <section class="slide" data-slide="6">
+    <div class="eyebrow">Plan de trabajo — 11 meses · cuatro componentes en paralelo</div>
+    <h2 class="slide-title">Cuatro componentes en paralelo</h2>
+    <div class="timeline-bar">
+      <div class="tl-seg g1">01</div>
+      <div class="tl-seg g2">02</div>
+      <div class="tl-seg g3">03</div>
+      <div class="tl-seg g4 tl-tip">04</div>
+    </div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-title">Informe Regional ODS4</div>
+        <ul class="phase-list">
+          <li>Acceso, trayectorias y calidad (LLECE, PISA)</li>
+          <li>Fuentes: UIS, CEPALSTAT, encuestas, ministerios</li>
+          <li>Metadatos y limitaciones documentados</li>
+        </ul>
+      </div>
+      <div class="phase orange">
+        <div class="phase-title">Repositorio regional de indicadores</div>
+        <ul class="phase-list">
+          <li>Flujos escalables e interoperables</li>
+          <li>Reproducibles, mantenibles por equipos institucionales</li>
+          <li>Experiencia previa fortaleciendo sistemas en ALC</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-title">Desarrollo metodológico SIRIED</div>
+        <ul class="phase-list">
+          <li>En marco de la red RIINEE</li>
+          <li>Armonización con la CIF</li>
+          <li>Acceso y logro de estudiantes con discapacidad</li>
+        </ul>
+      </div>
+      <div class="phase orange">
+        <div class="phase-title">Tendencias emergentes</div>
+        <ul class="phase-list">
+          <li>Transición demográfica: oportunidad para elevar calidad</li>
+          <li>IA generativa y herramientas digitales en el aula</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Productos -->
+  <section class="slide" data-slide="7">
+    <div class="eyebrow">Productos esperados</div>
+    <h2 class="slide-title">Entregables previstos, sin limitarse a ellos</h2>
+    <div class="grid-4">
+      <div class="item">
+        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M28 4H10a2 2 0 0 0-2 2v36a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V16Z"/>
+          <polyline points="28 4 28 16 40 16"/>
+          <line x1="16" y1="24" x2="32" y2="24"/>
+          <line x1="16" y1="30" x2="32" y2="30"/>
+          <line x1="16" y1="36" x2="24" y2="36"/>
+        </svg>
+        <div class="item-title">Informe Regional ODS4</div>
+        <div class="item-desc">Sistematización con énfasis en brechas que se ampliaron post-pandemia.</div>
+      </div>
+      <div class="item">
+        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="22" cy="9" r="3"/>
+          <path d="M22 14v9l5 4-3 9"/>
+          <circle cx="22" cy="32" r="10"/>
+          <line x1="22" y1="32" x2="32" y2="28"/>
+        </svg>
+        <div class="item-title">SIRIED actualizado</div>
+        <div class="item-desc">Armonización con la CIF. Acceso, permanencia y logro para estudiantes con discapacidad.</div>
+      </div>
+      <div class="item">
+        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="6" y1="42" x2="42" y2="42"/>
+          <rect x="11" y="28" width="6" height="14"/>
+          <rect x="21" y="20" width="6" height="22"/>
+          <rect x="31" y="12" width="6" height="30"/>
+        </svg>
+        <div class="item-title">Página regional de indicadores</div>
+        <div class="item-desc">Producto vivo en Power BI / Tableau. Consultas dinámicas por país y dimensión.</div>
+      </div>
+      <div class="item">
+        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 16 16 24 26 18 36 30 42 24"/>
+          <circle cx="6" cy="16" r="2" fill="currentColor"/>
+          <circle cx="16" cy="24" r="2" fill="currentColor"/>
+          <circle cx="26" cy="18" r="2" fill="currentColor"/>
+          <circle cx="36" cy="30" r="2" fill="currentColor"/>
+          <circle cx="42" cy="24" r="2" fill="currentColor"/>
+        </svg>
+        <div class="item-title">Prospectiva: natalidad</div>
+        <div class="item-desc">Impacto demográfico en planificación educativa.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Cierre -->
+  <section class="slide thanks" data-slide="8">
+    <div class="thanks-word">Gracias</div>
+  </section>
+
+</div>
+
+<div class="counter" id="counter">01 / 08</div>
+
+<div class="controls">
+  <span>← →</span>
+  <button class="nav-btn" id="prev" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="next" aria-label="Siguiente">›</button>
+</div>
+
+<div class="hint">Usa las flechas del teclado para avanzar</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const total = slides.length;
+  let current = 0;
+
+  function show(i) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[i].classList.add('active');
+    counter.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    progress.style.width = ((i + 1) / total * 100) + '%';
+  }
+
+  function next() { if (current < total - 1) { current++; show(current); } }
+  function prev() { if (current > 0) { current--; show(current); } }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') { current = 0; show(0); }
+    if (e.key === 'End') { current = total - 1; show(current); }
+  });
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+
+  show(0);
+</script>
+
+</body>
+</html>
