@@ -111,12 +111,12 @@
     max-width: 1200px;
   }
   .cred-label {
-    font-size: 0.72rem;
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #999999;
-    margin-bottom: 0.6rem;
+    color: #cccccc;
+    margin-bottom: 0;
   }
   .cred-value {
     font-size: 0.95rem;
@@ -253,6 +253,31 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     max-width: 1300px;
+  }
+
+  /* Labels de componentes bajo la timeline */
+  .component-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1300px;
+    margin-bottom: 1.6rem;
+  }
+  .comp-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+    padding-left: 1.4rem;
+  }
+  .comp-label:not(:first-child) { padding-left: 2rem; }
+
+  /* Grid de productos cuando va combinado con timeline */
+  .grid-4.deliverables {
+    margin-top: 0.5rem;
+  }
+  .grid-4.deliverables .item-desc {
+    margin-top: 0.4rem;
   }
   .phase-title {
     font-size: 1rem;
@@ -417,7 +442,7 @@
 </head>
 <body>
 
-<div class="progress" id="progress" style="width: 12.5%"></div>
+<div class="progress" id="progress" style="width: 16.66%"></div>
 
 <div class="deck" id="deck">
 
@@ -442,22 +467,10 @@
     <div class="eyebrow">Trayectoria</div>
     <h2 class="slide-title">Economía + demografía aplicadas a datos en ALC</h2>
     <div class="credentials">
-      <div class="cred">
-        <div class="cred-label">Producción estadística</div>
-        <div class="cred-value">Experiencia con toda la cadena de datos.</div>
-      </div>
-      <div class="cred">
-        <div class="cred-label">Regional ALC</div>
-        <div class="cred-value">Proyectos: pérdida de aprendizajes y educación en países de la Amazonía.</div>
-      </div>
-      <div class="cred">
-        <div class="cred-label">Trabajo actual</div>
-        <div class="cred-value">Analítica e innovación en datos sociales.</div>
-      </div>
-      <div class="cred">
-        <div class="cred-label">Herramientas e idiomas</div>
-        <div class="cred-value">Stata, R, Python, GitHub. Inglés C1.</div>
-      </div>
+      <div class="cred"><div class="cred-label">Producción estadística</div></div>
+      <div class="cred"><div class="cred-label">Regional ALC</div></div>
+      <div class="cred"><div class="cred-label">Trabajo actual</div></div>
+      <div class="cred"><div class="cred-label">Herramientas e idiomas</div></div>
     </div>
   </section>
 
@@ -489,31 +502,8 @@
     </div>
   </section>
 
-  <!-- Slide 4: Tres tensiones -->
+  <!-- Slide 4: Enfoque metodológico -->
   <section class="slide" data-slide="4">
-    <div class="eyebrow">Contexto regional</div>
-    <h2 class="slide-title">Tres tensiones estructurales</h2>
-    <div class="grid-3">
-      <div class="item orange">
-        <div class="item-num">01</div>
-        <div class="item-title">Heterogeneidad de los SIGED</div>
-        <div class="item-desc">Comparar entre Estados Miembros requiere armonizar definiciones.</div>
-      </div>
-      <div class="item orange">
-        <div class="item-num">02</div>
-        <div class="item-title">Invisibilidad estadística</div>
-        <div class="item-desc">Discapacidad, pueblos indígenas, migrantes y población rural.</div>
-      </div>
-      <div class="item orange">
-        <div class="item-num">03</div>
-        <div class="item-title">Transición demográfica</div>
-        <div class="item-desc">La caída de natalidad está transformando las cohortes escolares.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 5: Enfoque metodológico -->
-  <section class="slide" data-slide="5">
     <div class="eyebrow">Enfoque metodológico</div>
     <h2 class="slide-title">Cuatro principios</h2>
     <div class="grid-4">
@@ -540,56 +530,23 @@
     </div>
   </section>
 
-  <!-- Slide 6: Plan de trabajo -->
-  <section class="slide" data-slide="6">
+  <!-- Slide 5: Plan de trabajo -->
+  <section class="slide" data-slide="5">
     <div class="eyebrow">Plan de trabajo — 11 meses</div>
-    <h2 class="slide-title">Cuatro componentes en paralelo</h2>
+    <h2 class="slide-title">Cuatro componentes y sus entregables</h2>
     <div class="timeline-bar">
       <div class="tl-seg g1">01</div>
       <div class="tl-seg g2">02</div>
       <div class="tl-seg g3">03</div>
       <div class="tl-seg g4 tl-tip">04</div>
     </div>
-    <div class="timeline">
-      <div class="phase">
-        <div class="phase-title">Informe Regional ODS4</div>
-        <ul class="phase-list">
-          <li>Acceso, trayectorias y calidad (LLECE, PISA)</li>
-          <li>Fuentes: UIS, CEPALSTAT, encuestas, ministerios</li>
-          <li>Metadatos y limitaciones documentados</li>
-        </ul>
-      </div>
-      <div class="phase orange">
-        <div class="phase-title">Repositorio regional de indicadores</div>
-        <ul class="phase-list">
-          <li>Flujos escalables e interoperables</li>
-          <li>Reproducibles, mantenibles por equipos institucionales</li>
-          <li>Experiencia previa fortaleciendo sistemas en ALC</li>
-        </ul>
-      </div>
-      <div class="phase">
-        <div class="phase-title">Desarrollo metodológico SIRIED</div>
-        <ul class="phase-list">
-          <li>En marco de la red RIINEE</li>
-          <li>Armonización con la CIF</li>
-          <li>Acceso y logro de estudiantes con discapacidad</li>
-        </ul>
-      </div>
-      <div class="phase orange">
-        <div class="phase-title">Tendencias emergentes</div>
-        <ul class="phase-list">
-          <li>Transición demográfica: oportunidad para elevar calidad</li>
-          <li>IA generativa y herramientas digitales en el aula</li>
-        </ul>
-      </div>
+    <div class="component-labels">
+      <div class="comp-label">Informe Regional ODS4</div>
+      <div class="comp-label">Repositorio regional</div>
+      <div class="comp-label">SIRIED</div>
+      <div class="comp-label">Tendencias emergentes</div>
     </div>
-  </section>
-
-  <!-- Slide 7: Productos -->
-  <section class="slide" data-slide="7">
-    <div class="eyebrow">Productos esperados</div>
-    <h2 class="slide-title">Entregables previstos, sin limitarse a ellos</h2>
-    <div class="grid-4">
+    <div class="grid-4 deliverables">
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M28 4H10a2 2 0 0 0-2 2v36a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V16Z"/>
@@ -598,18 +555,7 @@
           <line x1="16" y1="30" x2="32" y2="30"/>
           <line x1="16" y1="36" x2="24" y2="36"/>
         </svg>
-        <div class="item-title">Informe Regional ODS4</div>
-        <div class="item-desc">Sistematización con énfasis en brechas que se ampliaron post-pandemia.</div>
-      </div>
-      <div class="item">
-        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="22" cy="9" r="3"/>
-          <path d="M22 14v9l5 4-3 9"/>
-          <circle cx="22" cy="32" r="10"/>
-          <line x1="22" y1="32" x2="32" y2="28"/>
-        </svg>
-        <div class="item-title">SIRIED actualizado</div>
-        <div class="item-desc">Armonización con la CIF. Acceso, permanencia y logro para estudiantes con discapacidad.</div>
+        <div class="item-desc">Informe regional con foco en brechas post-pandemia.</div>
       </div>
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -618,8 +564,16 @@
           <rect x="21" y="20" width="6" height="22"/>
           <rect x="31" y="12" width="6" height="30"/>
         </svg>
-        <div class="item-title">Página regional de indicadores</div>
-        <div class="item-desc">Producto vivo en Power BI / Tableau. Consultas dinámicas por país y dimensión.</div>
+        <div class="item-desc">Página regional de indicadores en Power BI / Tableau.</div>
+      </div>
+      <div class="item">
+        <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="22" cy="9" r="3"/>
+          <path d="M22 14v9l5 4-3 9"/>
+          <circle cx="22" cy="32" r="10"/>
+          <line x1="22" y1="32" x2="32" y2="28"/>
+        </svg>
+        <div class="item-desc">SIRIED actualizado, armonizado con la CIF.</div>
       </div>
       <div class="item">
         <svg class="product-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -630,20 +584,19 @@
           <circle cx="36" cy="30" r="2" fill="currentColor"/>
           <circle cx="42" cy="24" r="2" fill="currentColor"/>
         </svg>
-        <div class="item-title">Prospectiva: natalidad</div>
-        <div class="item-desc">Impacto demográfico en planificación educativa.</div>
+        <div class="item-desc">Prospectiva sobre natalidad e IA generativa en el aula.</div>
       </div>
     </div>
   </section>
 
-  <!-- Slide 8: Cierre -->
-  <section class="slide thanks" data-slide="8">
+  <!-- Slide 6: Cierre -->
+  <section class="slide thanks" data-slide="6">
     <div class="thanks-word">Gracias</div>
   </section>
 
 </div>
 
-<div class="counter" id="counter">01 / 08</div>
+<div class="counter" id="counter">01 / 06</div>
 
 <div class="timer" id="timer" title="Pausa/Reanuda con la tecla P · Reinicia volviendo al inicio (Home)">
   <span class="timer-label">Tiempo</span>
